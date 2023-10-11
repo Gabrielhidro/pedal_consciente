@@ -11,9 +11,7 @@ import {
   Button,
   Grid,
 } from "@mui/material";
-import { css } from "@emotion/react";
 
-// Dados fictícios para os selects
 const denunciaTypes = [
   "Crime ambiental",
   "Tráfico de drogas",
@@ -87,7 +85,7 @@ export default function Contact() {
       <Form>
         <h1 className="title">Denúncia</h1>
         <FormControl variant="outlined" fullWidth>
-          <InputLabel id="denunciaType-label">Tipo de denuncia</InputLabel>
+          <InputLabel id="denunciaType-label">Tipo de denúncia</InputLabel>
           <Select
             labelId="denunciaType-label"
             id="denunciaType"
@@ -216,6 +214,7 @@ export default function Contact() {
               !form.estado ||
               !form.cidade ||
               !form.endereco ||
+              !form.bairro ||
               !form.denuncia ||
               !form.data
             }
