@@ -5,7 +5,7 @@ function App() {
   return (
     <BrowserRouter>
       <div>
-        <div>Sidebar</div>
+        {/* <div>Sidebar</div> */}
         <Routes>
           <Route path="/" exact element={<div>
             <h1>Home</h1>
