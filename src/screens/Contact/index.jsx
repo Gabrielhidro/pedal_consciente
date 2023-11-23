@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { ButtonsContainer, Container, Form } from "./styled";
 import {
   TextField,
@@ -30,7 +30,7 @@ const cidades = {
   "São Paulo": ["São Paulo", "Campinas", "Santos"],
   "Rio de Janeiro": ["Rio de Janeiro", "Niterói", "Nova Iguaçu"],
   "Minas Gerais": ["Belo Horizonte", "Uberlândia", "Contagem"],
-  Paraná: ["Curitiba", "Londrina", "Maringá"],
+  "Paraná": ["Curitiba", "Londrina", "Maringá"],
   "Santa Catarina": ["Florianópolis", "Joinville", "Blumenau"],
 };
 
@@ -62,9 +62,20 @@ export default function Contact() {
     });
   };
 
-  const handleSave = () => {
-    console.log(form);
-  };
+    const handleSave = useCallback(async () => {
+
+      const dataRequest = {
+        method: 'POST',
+        body: JSON.stringify(form),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+      
+      const response = await fetch('http://127.0.0.1:8000/app_denuncia/', dataRequest)
+      
+      console.log(response);
+    }, [form])
 
   const handleCancel = () => {
     setForm({
@@ -90,7 +101,7 @@ export default function Contact() {
             labelId="denunciaType-label"
             id="denunciaType"
             name="denunciaType"
-            value={form.denunciaType}
+            required value={form.denunciaType}
             onChange={handleChange}
             label="Tipo de denuncia"
           >
@@ -107,7 +118,7 @@ export default function Contact() {
             labelId="estado-label"
             id="estado"
             name="estado"
-            value={form.estado}
+            required value={form.estado}
             onChange={handleChange}
             label="Estado"
           >
@@ -124,7 +135,7 @@ export default function Contact() {
             labelId="cidade-label"
             id="cidade"
             name="cidade"
-            value={form.cidade}
+            required value={form.cidade}
             onChange={handleChange}
             label="Cidade"
             disabled={!form.estado}
@@ -141,7 +152,7 @@ export default function Contact() {
           name="endereco"
           label="Endereço"
           variant="outlined"
-          value={form.endereco}
+          required value={form.endereco}
           onChange={handleChange}
           fullWidth
         />
@@ -151,7 +162,7 @@ export default function Contact() {
               name="bairro"
               label="Bairro"
               variant="outlined"
-              value={form.bairro}
+              required value={form.bairro}
               onChange={handleChange}
               fullWidth
             />
@@ -161,7 +172,7 @@ export default function Contact() {
               name="numero"
               label="Número"
               variant="outlined"
-              value={form.numero}
+              required value={form.numero}
               onChange={handleChange}
               fullWidth
             />
@@ -172,7 +183,7 @@ export default function Contact() {
           name="denuncia"
           label="Denuncia"
           variant="outlined"
-          value={form.denuncia}
+          required value={form.denuncia}
           onChange={handleChange}
           multiline
           rows={4}
@@ -183,7 +194,7 @@ export default function Contact() {
           label="Data"
           type="date"
           name="data"
-          value={form.data}
+          required value={form.data}
           onChange={handleChange}
           InputLabelProps={{
             shrink: true,

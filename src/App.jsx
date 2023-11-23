@@ -8,12 +8,14 @@ function App() {
         {/* <div>Sidebar</div> */}
         <Routes>
           <Route path="/" exact element={<div>
-            <h1>Home</h1>
-            <button 
+            {/* <h1>Home</h1> */}
+            <Contact/>
+
+            {/* <button 
               onClick={() => {
                 window.location.href = '/contact';
               }}
-            >Contato</button>
+            >Contato</button> */}
           </div>} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
