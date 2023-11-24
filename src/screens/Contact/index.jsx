@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { ButtonsContainer, Container, Form } from "./styled";
+import { ButtonsContainer, Container, Form, BackButton } from "./styled";
 import {
   TextField,
   Select,
@@ -11,6 +11,10 @@ import {
   Button,
   Grid,
 } from "@mui/material";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { MdArrowBack } from "react-icons/md";
+
 
 const denunciaTypes = [
   "Crime ambiental",
@@ -72,9 +76,15 @@ export default function Contact() {
         },
       }
       
-      const response = await fetch('http://127.0.0.1:8000/app_denuncia/', dataRequest)
-      
-      console.log(response);
+      try {
+        await fetch('http://127.0.0.1:8000/app_denuncia/', dataRequest)
+        toast.success('Denúncia enviada com sucesso!')
+        handleCancel()
+
+      } catch (error) {
+        toast.error('Erro ao enviar denúncia!')
+      }
+
     }, [form])
 
   const handleCancel = () => {
@@ -93,6 +103,12 @@ export default function Contact() {
 
   return (
     <Container>
+      <ToastContainer />
+
+      <BackButton onClick={() => window.location.href = "/"}>
+        <MdArrowBack  size={20} />
+      </BackButton>
+
       <Form>
         <h1 className="title">Denúncia</h1>
         <FormControl variant="outlined" fullWidth>

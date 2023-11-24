@@ -1,12 +1,12 @@
 import styled from "@emotion/styled";
 
 export const Container = styled.div`
+  box-sizing: border-box;
   width: 100%;
   height: 100vh;
   background-color: #f2f2f2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+  padding: 24px;
 `
 
 export const Form = styled.div`
@@ -14,12 +14,7 @@ export const Form = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 24px;
-  padding: 24px;
-  background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0px 0px 8px 0px #00000040;
-  width: 100%;
-  max-width: 500px;
   color: #242424;
 
   .title {
@@ -36,4 +31,22 @@ export const ButtonsContainer = styled.div`
   gap: 12px;
   justify-content: center;
   width: 100%;
+`
+
+export const BackButton = styled.button`
+  border-radius: 999px;
+  border: none;
+  background-color: #fff;
+  box-shadow: 0px 0px 8px 0px #00000040;
+  padding: 8px;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: #f2f2f2;
+  }
 `
