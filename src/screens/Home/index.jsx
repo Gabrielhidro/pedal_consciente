@@ -1,10 +1,9 @@
 import { Button } from "@mui/material";
-import { BannerContainer, CardsContainer, Container, Footer, Header, LogoContainer, MainContent, TypeSection } from "./styled";
+import { BannerContainer, Container, Footer, Header, LogoContainer, MainContent, TypeSection } from "./styled";
 import Logo from "../../assets/logo.png";
 import AmbientalBanner from "../../assets/ambiente.jpg";
 
 export default function Home() {
-
 
   return (
     <Container>

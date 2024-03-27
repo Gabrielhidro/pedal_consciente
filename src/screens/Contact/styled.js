@@ -23,6 +23,13 @@ export const Form = styled.div`
     text-align: center;
     width: 100%;
   }
+
+  h2 {
+    font-size: 18px;
+    font-weight: bold;
+    width: 100%;
+
+  }
 `
 
 export const ButtonsContainer = styled.div`

@@ -49,7 +49,29 @@ export default function Contact() {
     denuncia: "",
     data: "",
     mesmaData: false,
+    imagem: "",
   });
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+  
+    reader.onloadend = () => {
+      setSelectedImage(reader.result);
+  
+      setForm((prevForm) => ({
+        ...prevForm,
+        imagem: reader.result,
+      }));
+    };
+  
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
+
+  console.log(selectedImage);
 
   const handleChange = (event) => {
     setForm({
@@ -66,26 +88,26 @@ export default function Contact() {
     });
   };
 
-    const handleSave = useCallback(async () => {
+  const handleSave = useCallback(async () => {
 
-      const dataRequest = {
-        method: 'POST',
-        body: JSON.stringify(form),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-      
-      try {
-        await fetch('http://127.0.0.1:8000/app_denuncia/', dataRequest)
-        toast.success('Denúncia enviada com sucesso!')
-        handleCancel()
+    const dataRequest = {
+      method: 'POST',
+      body: JSON.stringify(form),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+    
+    try {
+      await fetch('http://127.0.0.1:8000/app_denuncia/', dataRequest)
+      toast.success('Denúncia enviada com sucesso!')
+      handleCancel()
 
-      } catch (error) {
-        toast.error('Erro ao enviar denúncia!')
-      }
+    } catch (error) {
+      toast.error('Erro ao enviar denúncia!')
+    }
 
-    }, [form])
+  }, [form])
 
   const handleCancel = () => {
     setForm({
@@ -98,6 +120,7 @@ export default function Contact() {
       denuncia: "",
       data: "",
       mesmaData: false,
+      imagem: "",
     });
   };
 
@@ -230,6 +253,15 @@ export default function Contact() {
           }
           label="Mesma data do anúncio"
         />
+
+        <h2>Selecione uma imagem</h2>
+        <input type="file" accept="image/*" onChange={handleImageChange} />
+
+        {selectedImage && (
+          <div>
+            <img src={selectedImage} alt="Uploaded" style={{ maxWidth: '100px', maxHeight: '100px' }} />
+          </div>
+        )}    
 
         <ButtonsContainer>
           <Button variant="outlined" onClick={handleCancel}>
