@@ -88,14 +88,29 @@ export default function Contact() {
     });
   };
 
+  function base64ToFile(base64String, fileName) {
+    let arr = base64String.split(','), mime = arr[0].match(/:(.*?);/)[1],
+    bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+    while(n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], fileName, {type:mime});
+  }
+
   const handleSave = useCallback(async () => {
+    const formData = new FormData();
+    for (const key in form) {
+      if (key === 'imagem' && form[key]) {
+        const file = base64ToFile(form[key], 'imagem.png');
+        formData.append(key, file);
+      } else {
+        formData.append(key, form[key]);
+      }
+    }
 
     const dataRequest = {
       method: 'POST',
-      body: JSON.stringify(form),
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      body: formData
     }
     
     try {
