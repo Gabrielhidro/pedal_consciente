@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { ButtonsContainer, Container, Form, BackButton } from "./styled";
+import { ButtonsContainer, Form, BackButton } from "./styled";
 import {
   TextField,
   Select,
@@ -14,6 +14,8 @@ import {
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { MdArrowBack } from "react-icons/md";
+import { Header, LogoContainer, Container } from "../Home/styled";
+import Logo from "../../assets/logo.png";
 
 
 const denunciaTypes = [
@@ -126,11 +128,26 @@ export default function Contact() {
 
   return (
     <Container>
+    <Header>
+      <div className="logoInfo">
+        <LogoContainer>
+            <img src={Logo} alt="" />
+        </LogoContainer>
+        <div className="divider" />
+        <div className="info">
+          <h1>Canal de denúncias</h1>
+        </div>
+      </div>
+      <Button 
+        variant="contained"
+        onClick={() => {
+          window.location.href = "/"
+        }}
+      >
+        Home
+      </Button>
+    </Header>
       <ToastContainer />
-
-      <BackButton onClick={() => window.location.href = "/"}>
-        <MdArrowBack  size={20} />
-      </BackButton>
 
       <Form>
         <h1 className="title">Denúncia</h1>

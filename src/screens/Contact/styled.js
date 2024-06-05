@@ -16,6 +16,8 @@ export const Form = styled.div`
   gap: 24px;
   border-radius: 8px;
   color: #242424;
+  margin-top: 28px;
+  padding-inline: 48px;
 
   .title {
     font-size: 24px;
